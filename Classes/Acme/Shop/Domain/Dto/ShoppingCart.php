@@ -7,7 +7,9 @@ namespace Acme\Shop\Domain\Dto;
  *                                                                        */
 
 use Acme\Shop\Domain\Model\Product;
+use Acme\Shop\Domain\Model\Purchase;
 use Acme\Shop\Domain\Model\PurchaseItem;
+use Doctrine\Common\Collections\ArrayCollection;
 use TYPO3\Flow\Annotations as Flow;
 
 /**
@@ -40,6 +42,33 @@ class ShoppingCart {
 			}
 		}
 		$this->items[] = new PurchaseItem($product);
+	}
+
+	/**
+	 * @return float
+	 */
+	public function getTotalPrice() {
+		$totalPrice = 0;
+		foreach($this->getItems() as $item) {
+			$totalPrice += $item->getTotalPrice();
+		}
+		return $totalPrice;
+	}
+
+	/**
+	 * @return Purchase
+	 */
+	public function createPurchase() {
+		$purchase = new Purchase();
+		$purchase->setItems(new ArrayCollection($this->items));
+		return $purchase;
+	}
+
+	/**
+	 * @return void
+	 */
+	public function removeAll() {
+		$this->items = array();
 	}
 
 }

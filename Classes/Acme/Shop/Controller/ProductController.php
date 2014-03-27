@@ -6,14 +6,14 @@ namespace Acme\Shop\Controller;
  *                                                                        *
  *                                                                        */
 
+use Acme\Shop\Domain\Model\Product;
 use Acme\Shop\Domain\Repository\ProductRepository;
 use TYPO3\Flow\Annotations as Flow;
-use TYPO3\Flow\Mvc\Controller\ActionController;
 
 /**
  * Controller for listing products
  */
-class ProductController extends ActionController {
+class ProductController extends AbstractBaseController {
 
 	/**
 	 * @Flow\Inject
@@ -27,6 +27,15 @@ class ProductController extends ActionController {
 	public function indexAction() {
 		$products = $this->productRepository->findAll();
 		$this->view->assign('products', $products);
+	}
+
+	/**
+	 * @param Product $product
+	 * @return void
+	 * @Flow\IgnoreValidation("$product")
+	 */
+	public function showAction(Product $product) {
+		$this->view->assign('product', $product);
 	}
 
 }

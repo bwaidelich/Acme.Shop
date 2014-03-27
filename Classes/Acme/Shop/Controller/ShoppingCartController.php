@@ -6,27 +6,18 @@ namespace Acme\Shop\Controller;
  *                                                                        *
  *                                                                        */
 
-use Acme\Shop\Domain\Dto\ShoppingCart;
 use Acme\Shop\Domain\Model\Product;
 use TYPO3\Flow\Annotations as Flow;
-use TYPO3\Flow\Mvc\Controller\ActionController;
 
 /**
  * Controller for the shopping cart
  */
-class ShoppingCartController extends ActionController {
-
-	/**
-	 * @Flow\Inject
-	 * @var ShoppingCart
-	 */
-	protected $shoppingCart;
+class ShoppingCartController extends AbstractBaseController {
 
 	/**
 	 * @return void
 	 */
 	public function showAction() {
-		$this->view->assign('shoppingCart', $this->shoppingCart);
 	}
 
 	/**
@@ -35,7 +26,7 @@ class ShoppingCartController extends ActionController {
 	 */
 	public function addProductAction(Product $product) {
 		$this->shoppingCart->addProduct($product);
-		$this->redirect('show');
+		$this->redirect('index', 'Product');
 	}
 
 }

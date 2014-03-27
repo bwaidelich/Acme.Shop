@@ -1,0 +1,28 @@
+<f:layout name="Default" />
+
+<f:section name="Title">Purchase</f:section>
+
+<f:section name="Content">
+	<h1>Purchase:</h1>
+	<f:render partial="Form/Errors" />
+	<f:form action="create" object="{purchase}" objectName="purchase">
+		<ul>
+			<f:for each="{purchase.items}" as="item" key="itemIndex">
+				<li>
+					{item.name} ({item.amount}) - {item.totalPrice -> f:format.currency(currencySign: '$')}
+					<f:form.hidden property="items.{itemIndex}.product" value="{item.product}" />
+					<f:form.hidden property="items.{itemIndex}.amount" value="{item.amount}" />
+				</li>
+			</f:for>
+		</ul>
+
+		<p>
+			Name: <f:form.textfield property="customerName" />
+		</p>
+		<p>
+			E-Mail: <f:form.textfield property="customerEmailAddress" />
+		</p>
+
+		<f:form.submit value="BUY" />
+	</f:form>
+</f:section>

@@ -1,13 +1,18 @@
 <f:layout name="Default" />
 
-<f:section name="Title">Index view of Standard controller</f:section>
+<f:section name="Title">Products</f:section>
 
 <f:section name="Content">
+	<f:render partial="ShoppingCart" arguments="{shoppingCart: shoppingCart}" />
+
 	<h1>Products ({products -> f:count()} product(s))</h1>
 	<ul>
 		<f:for each="{products}" as="product">
 			<li>
-				{product.name}
+				<f:link.action action="show" arguments="{product: product}">
+					{product.name} - {product.price -> f:format.currency(currencySign: '$')}
+				</f:link.action>
+
 				<f:form action="addProduct" controller="ShoppingCart" arguments="{product: product}">
 					<f:form.submit value="ADD TO CART" />
 				</f:form>

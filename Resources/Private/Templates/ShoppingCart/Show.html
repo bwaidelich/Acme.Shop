@@ -7,8 +7,13 @@
 	<ul>
 		<f:for each="{shoppingCart.items}" as="item">
 			<li>
-				{item.name} ({item.amount})
+				{item.name} ({item.amount}) - {item.totalPrice -> f:format.currency(currencySign: '$')}
 			</li>
 		</f:for>
 	</ul>
+	<p><f:link.action action="index" controller="Product">Product list</f:link.action></p>
+
+	<f:form action="new" controller="Purchase">
+		<f:form.submit value="CHECKOUT" />
+	</f:form>
 </f:section>

@@ -17,17 +17,21 @@ use Doctrine\ORM\Mapping as ORM;
 class Purchase {
 
 	/**
+	 * @Flow\Validate(type="NotEmpty")
 	 * @var \Doctrine\Common\Collections\Collection<\Acme\Shop\Domain\Model\PurchaseItem>
 	 * @ORM\OneToMany(mappedBy="purchase")
 	 */
 	protected $items;
 
 	/**
+	 * @Flow\Validate(type="NotEmpty")
 	 * @var string
 	 */
 	protected $customerName;
 
 	/**
+	 * @Flow\Validate(type="NotEmpty")
+	 * @Flow\Validate(type="EmailAddress")
 	 * @var string
 	 */
 	protected $customerEmailAddress;
@@ -82,6 +86,7 @@ class Purchase {
 	 * @return void
 	 */
 	public function addItem(PurchaseItem $purchaseItem) {
+		$purchaseItem->setPurchase($this);
 		$this->items->add($purchaseItem);
 	}
 

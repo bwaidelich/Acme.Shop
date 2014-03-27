@@ -1,0 +1,12 @@
+<f:layout name="Default" />
+
+<f:section name="Title">Product {product.name}</f:section>
+
+<f:section name="Content">
+	<f:render partial="ShoppingCart" arguments="{shoppingCart: shoppingCart}" />
+
+	<h1>Product "{product.name}"</h1>
+	<p>Price: {product.price -> f:format.currency(currencySign: '$')}</p>
+
+	<p><f:link.action action="index">Product list</f:link.action></p>
+</f:section>

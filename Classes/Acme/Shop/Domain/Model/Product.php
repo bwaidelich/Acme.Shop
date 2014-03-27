@@ -15,11 +15,13 @@ use Doctrine\ORM\Mapping as ORM;
 class Product {
 
 	/**
+	 * @Flow\Validate(type="Label")
 	 * @var string
 	 */
 	protected $name;
 
 	/**
+	 * @Flow\Validate(type="NumberRange", options={"minimum"=0})
 	 * @var float
 	 */
 	protected $price;

@@ -1,0 +1,13 @@
+<div id="shopping-cart">
+	<h2>
+		<f:link.action action="show" controller="ShoppingCart">Shopping cart</f:link.action>
+	</h2>
+	<ul>
+		<f:for each="{shoppingCart.items}" as="item">
+			<li>
+				{item.name} ({item.amount}) - {item.totalPrice -> f:format.currency(currencySign: '$')}
+			</li>
+		</f:for>
+	</ul>
+	<p>Total: {shoppingCart.totalPrice -> f:format.currency(currencySign: '$')}</p>
+</div>
