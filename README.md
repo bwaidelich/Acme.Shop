@@ -1,5 +1,5 @@
-Setup
-=====
+Getting Started
+===============
 
 Install Flow base distribution:
 ```
@@ -20,8 +20,8 @@ Fix file permissions:
 
 Setup (virtual) server (or use [dnsmasq])
 
-Kickstart
-=========
+TYPO3.Kickstart
+---------------
 
 Kickstart package:
 ```
@@ -57,17 +57,47 @@ Kickstart controller:
 Add repositories ...
 
 Migration
-=========
+---------
 ```
 ./flow doctrine:migrate
 ./flow doctrine:migrationgenerate
 ```
 (setup database credentials?)
 
-Some dummy data
-===============
+Data fixtures
+-------------
+
+Kickstart CommandController
+
 ```
-./flow kickstart:commandcontroller Acme.Shop Products
+./flow kickstart:commandcontroller Acme.Shop Setup
 ```
+
+Add ```dummyCommand``` method, execute via
+
+```
+./flow setup:dummy
+```
+
+Use this package
+================
+
+Clone to ```<Root>/Packages/Application/Acme.Shop```.
+
+(optionally) Include custom routes via following definition in ```<Root>/Configuration/Routes.yaml```:
+```
+-
+  name: 'Acme.Shop'
+  uriPattern: '<AcmeShopSubroutes>'
+  defaults:
+    '@package':    'Acme.Shop'
+    '@format': 'html'
+  subRoutes:
+    'AcmeShopSubroutes':
+      package: 'Acme.Shop'
+      variables:
+        'suffix': '.html'
+```
+
 
 [dnsmasq]:https://gist.github.com/robertlemke/4951820
