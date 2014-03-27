@@ -6,19 +6,29 @@ namespace Acme\Shop\Tests\Unit\Domain\Model;
  *                                                                        *
  *                                                                        */
 
+use Acme\Shop\Domain\Model\Purchase;
+use TYPO3\Flow\Tests\UnitTestCase;
+
 /**
  * Testcase for Purchase
  */
-class PurchaseTest extends \TYPO3\Flow\Tests\UnitTestCase {
+class PurchaseTest extends UnitTestCase {
 
 	/**
 	 * @test
 	 */
-	public function makeSureThatSomethingHolds() {
-		$this->markTestIncomplete('Automatically generated test case; you need to adjust this!');
+	public function getTotalPriceSumsUpTheTotalPriceOfEachItem() {
+		$purchase = new Purchase();
 
-		$expected = 'Foo';
-		$actual = 'Foo'; // This should be the result of some function call
-		$this->assertSame($expected, $actual);
+		$mockPurchaseItem1 = $this->getMockBuilder('Acme\Shop\Domain\Model\PurchaseItem')->disableOriginalConstructor()->getMock();
+		$mockPurchaseItem1->expects($this->atLeastOnce())->method('getTotalPrice')->will($this->returnValue(123.45));
+		$purchase->addItem($mockPurchaseItem1);
+
+		$mockPurchaseItem2 = $this->getMockBuilder('Acme\Shop\Domain\Model\PurchaseItem')->disableOriginalConstructor()->getMock();
+		$mockPurchaseItem2->expects($this->atLeastOnce())->method('getTotalPrice')->will($this->returnValue(33.56));
+		$purchase->addItem($mockPurchaseItem2);
+
+		$expectedResult = 157.01;
+		$this->assertSame($expectedResult, $purchase->getTotalPrice());
 	}
 }

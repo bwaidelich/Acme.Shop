@@ -6,6 +6,7 @@ namespace Acme\Shop\Domain\Model;
  *                                                                        *
  *                                                                        */
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use TYPO3\Flow\Annotations as Flow;
 use Doctrine\ORM\Mapping as ORM;
@@ -30,6 +31,13 @@ class Purchase {
 	 * @var string
 	 */
 	protected $customerEmailAddress;
+
+	/**
+	 * Constructor
+	 */
+	function __construct() {
+		$this->items = new ArrayCollection();
+	}
 
 	/**
 	 * @return string
@@ -82,6 +90,17 @@ class Purchase {
 	 */
 	public function getItems() {
 		return $this->items;
+	}
+
+	/**
+	 * @return float
+	 */
+	public function getTotalPrice() {
+		$totalPrice = 0;
+		foreach($this->getItems() as $item) {
+			$totalPrice += $item->getTotalPrice();
+		}
+		return $totalPrice;
 	}
 
 }
