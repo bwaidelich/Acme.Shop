@@ -1,0 +1,14 @@
+<f:layout name="Default" />
+
+<f:section name="Title">Shopping cart</f:section>
+
+<f:section name="Content">
+	<h1>Shopping cart ({shoppingCart.items -> f:count()} item(s))</h1>
+	<ul>
+		<f:for each="{shoppingCart.items}" as="item">
+			<li>
+				{item.name} ({item.amount})
+			</li>
+		</f:for>
+	</ul>
+</f:section>

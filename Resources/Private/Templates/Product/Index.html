@@ -1,0 +1,17 @@
+<f:layout name="Default" />
+
+<f:section name="Title">Index view of Standard controller</f:section>
+
+<f:section name="Content">
+	<h1>Products ({products -> f:count()} product(s))</h1>
+	<ul>
+		<f:for each="{products}" as="product">
+			<li>
+				{product.name}
+				<f:form action="addProduct" controller="ShoppingCart" arguments="{product: product}">
+					<f:form.submit value="ADD TO CART" />
+				</f:form>
+			</li>
+		</f:for>
+	</ul>
+</f:section>

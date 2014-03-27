@@ -6,7 +6,9 @@ namespace Acme\Shop\Domain\Repository;
  *                                                                        *
  *                                                                        */
 
+use Acme\Shop\Domain\Model\Product;
 use TYPO3\Flow\Annotations as Flow;
+use TYPO3\Flow\Persistence\QueryResultInterface;
 use TYPO3\Flow\Persistence\Repository;
 
 /**
@@ -14,6 +16,11 @@ use TYPO3\Flow\Persistence\Repository;
  */
 class ProductRepository extends Repository {
 
-	// add customized methods here
+	/**
+	 * @return QueryResultInterface|Product[]
+	 */
+	public function findAll() {
+		return parent::findAll();
+	}
 
 }

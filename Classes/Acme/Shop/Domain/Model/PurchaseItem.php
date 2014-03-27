@@ -53,6 +53,13 @@ class PurchaseItem {
 	}
 
 	/**
+	 * @return string
+	 */
+	public function getName() {
+		return $this->getProduct()->getName();
+	}
+
+	/**
 	 * @return integer
 	 */
 	public function getAmount() {
@@ -65,6 +72,13 @@ class PurchaseItem {
 	 */
 	public function setAmount($amount) {
 		$this->amount = max(1, $amount);
+	}
+
+	/**
+	 * @return void
+	 */
+	public function increaseAmount() {
+		$this->amount ++;
 	}
 
 	/**
