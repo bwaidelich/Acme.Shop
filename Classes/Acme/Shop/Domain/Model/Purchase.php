@@ -30,11 +30,15 @@ class Purchase {
 	protected $customerName;
 
 	/**
-	 * @Flow\Validate(type="NotEmpty")
 	 * @Flow\Validate(type="EmailAddress")
 	 * @var string
 	 */
 	protected $customerEmailAddress;
+
+	/**
+	 * @var boolean
+	 */
+	protected $customerNewsletterActive = FALSE;
 
 	/**
 	 * Constructor
@@ -71,6 +75,21 @@ class Purchase {
 	 */
 	public function setCustomerEmailAddress($customerEmailAddress) {
 		$this->customerEmailAddress = $customerEmailAddress;
+	}
+
+	/**
+	 * @param boolean $customerNewsletterActive
+	 * @return void
+	 */
+	public function setCustomerNewsletterActive($customerNewsletterActive) {
+		$this->customerNewsletterActive = $customerNewsletterActive;
+	}
+
+	/**
+	 * @return boolean
+	 */
+	public function isCustomerNewsletterActive() {
+		return $this->customerNewsletterActive;
 	}
 
 	/**
