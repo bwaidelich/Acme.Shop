@@ -1,0 +1,56 @@
+#                                                                        #
+# Custom Routes configuration for the "Acme.Shop" package                #
+#                                                                        #
+# Include with the following definition in your global Routes.yaml:
+#
+#-
+#  name: 'Acme.Shop'
+#  uriPattern: '<AcmeShopSubroutes>'
+#  defaults:
+#    '@package':    'Acme.Shop'
+#    '@format': 'html'
+#  subRoutes:
+#    'AcmeShopSubroutes':
+#      package: 'Acme.Shop'
+#      variables:
+#        'suffix': '.html'
+
+-
+  name: 'Homepage'
+  uriPattern: ''
+  defaults:
+    '@controller': 'Product'
+    '@action':     'index'
+
+-
+  name: 'Shopping Cart'
+  uriPattern: 'shopping-cart<suffix>'
+  defaults:
+    '@controller': 'ShoppingCart'
+    '@action':     'show'
+
+-
+  name: 'Shopping Cart'
+  uriPattern: 'shopping-cart/add/{product}<suffix>'
+  defaults:
+    '@controller': 'ShoppingCart'
+    '@action':     'addProduct'
+  routeParts:
+    'product':
+      objectType: 'Acme\Shop\Domain\Model\Product'
+
+-
+  name: 'Product details'
+  uriPattern: 'products/{product}<suffix>'
+  defaults:
+    '@controller': 'Product'
+    '@action':     'show'
+  routeParts:
+    'product':
+      objectType: 'Acme\Shop\Domain\Model\Product'
+
+-
+  name: 'Purchase - Actions'
+  uriPattern: 'purchase/{@action}<suffix>'
+  defaults:
+    '@controller': 'Purchase'
